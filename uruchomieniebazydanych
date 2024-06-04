@@ -1,0 +1,17 @@
+docker network create -d bridge mysql-net
+
+docker container run --name mysql --restart=always \
+	-p 3306:3306 \
+    -v mysql-db-vol:/var/lib/mysql \
+    --network mysql-net \
+    mysql:5.7
+
+ docker container run --name phpmyadmin --restart=always \
+ 	-p 8081:80 --network mysql-net \
+ 	-e PMA_HOST=mysql \
+ 	-e PMA_PORT=3306 \
+     phpmyadmin/phpmyadmin:latest
+
+
+
+-e MYSQL_ROOT_PASSWORD=1234
