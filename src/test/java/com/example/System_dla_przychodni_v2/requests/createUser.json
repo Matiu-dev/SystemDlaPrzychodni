@@ -1,0 +1,12 @@
+{
+  "idUzytkownika": 1,
+  "haslo": "abc",
+  "dataRejestracji": "2024-06-05",
+  "email": "email",
+  "imie": "imie",
+  "nazwisko": "nazwisko",
+  "pesel": 12345,
+  "numerTelefonu": 123456,
+  "dataUrodzenia": "2024-06-05",
+  "adres": "adres"
+}
