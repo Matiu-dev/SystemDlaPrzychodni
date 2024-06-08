@@ -2,6 +2,8 @@ package com.example.System_dla_przychodni_v2.controller;
 
 import com.example.System_dla_przychodni_v2.model.Uzytkownik;
 import com.example.System_dla_przychodni_v2.repository.UzytkownikRepository;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import java.text.SimpleDateFormat;
@@ -17,28 +19,20 @@ public class UzytkownikController {
     }
 
     @PostMapping("/createUser")
-    public void addUser(@RequestBody Uzytkownik uzytkownikRequest) {
-
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
-
-//        System.out.println(uzytkownikRequest.getIdUzytkownika());
-
+    public ResponseEntity<Void> addUser(@RequestBody Uzytkownik uzytkownikRequest) {
         uzytkownikRepository.save(uzytkownikRequest);
+
+        return new ResponseEntity<>(HttpStatus.CREATED);
     }
 
     @DeleteMapping("/deleteUser")
-    public void deleteUser() {
+    public void deleteUser(@PathVariable long idUzytkownika) {
 
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
+        uzytkownikRepository.deleteById(idUzytkownika);
     }
 
     @GetMapping("/getUser/{idUzytkownika}")
     public Uzytkownik getUser(@PathVariable long idUzytkownika) {
-
-        String pattern = "yyyy-MM-dd";
-        SimpleDateFormat simpleDateFormat = new SimpleDateFormat(pattern);
 
         return uzytkownikRepository.findById(idUzytkownika);
     }
