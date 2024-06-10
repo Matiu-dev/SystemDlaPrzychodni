@@ -13,20 +13,23 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-import static org.springframework.test.web.servlet.MockMvcBuilder.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserTest {
+public class UnikalnyKodPacjentaTest {
 
     private final String CREATE_USER_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
             "requests/createUser.json";
+
+    private final String CREATE_UNIKALNY_KOD_PACJENTA_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
+            "requests/createUnikalneKodyPacjentow.json";
+
+    private final String CREATE_PACJENT_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
+            "requests/createPacjent.json";
 
     @Autowired
     private UzytkownikController uzytkownikController;
@@ -41,20 +44,32 @@ public class UserTest {
     public void userTestController() throws Exception {
 
         this.mockMvc
-                .perform(post("/createUser")
+                .perform(post("/createPacjent")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readFile(CREATE_USER_PATH)))
+                        .content(readFile(CREATE_PACJENT_PATH)))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
         this.mockMvc
-                .perform(get("/getUser/1000"))
+                .perform(post("/createUnikalnyKodPacjenta")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(readFile(CREATE_UNIKALNY_KOD_PACJENTA_PATH)))
                 .andDo(print())
-                .andExpect(jsonPath("email").value("emailtest"))
+                .andExpect(status().isCreated());
+
+        this.mockMvc
+                .perform(get("/getUnikalnyKodPacjenta/1000"))
+                .andDo(print())
+                .andExpect(jsonPath("unikalneKodyPacjentow").value("UnikalnyKod"))
                 .andExpect(status().isOk());
 
 //        this.mockMvc
-//                .perform(delete("/deleteUser/1000"))
+//                .perform(delete("/deleteUnikalnyKodPacjenta/1000"))
+//                .andDo(print())
+//                .andExpect(status().isOk());
+//
+//        this.mockMvc
+//                .perform(delete("/deletePacjent/1000"))
 //                .andDo(print())
 //                .andExpect(status().isOk());
     }

@@ -1,12 +1,6 @@
 {
-  "idUzytkownika": 2,
-  "haslo": "tajne",
-  "dataRejestracji": "2015-06-05",
-  "email": "gmail",
-  "imie": "xd",
-  "nazwisko": "xd",
-  "pesel": 654321,
-  "numerTelefonu": 654321,
-  "dataUrodzenia": "2051-06-05",
-  "adres": "tajne"
+  "idUzytkownika": 1000,
+  "haslo": "abc",
+  "dataRejestracji": "2024-06-05",
+  "email": "emailtest"
 }

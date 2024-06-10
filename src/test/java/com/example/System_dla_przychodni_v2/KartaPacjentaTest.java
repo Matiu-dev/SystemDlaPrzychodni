@@ -13,21 +13,23 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-import static org.springframework.test.web.servlet.MockMvcBuilder.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserTest {
+public class KartaPacjentaTest {
 
     private final String CREATE_USER_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
             "requests/createUser.json";
 
+    private final String CREATE_KARTA_PACJENTA_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
+            "requests/createKartePacjenta.json";
+
+    private final String CREATE_WIZYTY_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
+            "requests/createWizyty.json";
     @Autowired
     private UzytkownikController uzytkownikController;
 
@@ -41,20 +43,32 @@ public class UserTest {
     public void userTestController() throws Exception {
 
         this.mockMvc
-                .perform(post("/createUser")
+                .perform(post("/createWizyty")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readFile(CREATE_USER_PATH)))
+                        .content(readFile(CREATE_WIZYTY_PATH)))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
         this.mockMvc
-                .perform(get("/getUser/1000"))
+                .perform(post("/createKartePacjenta")
+                        .contentType(MediaType.APPLICATION_JSON)
+                        .content(readFile(CREATE_KARTA_PACJENTA_PATH)))
                 .andDo(print())
-                .andExpect(jsonPath("email").value("emailtest"))
+                .andExpect(status().isCreated());
+
+        this.mockMvc
+                .perform(get("/getKartePacjenta/1000"))
+                .andDo(print())
+                .andExpect(jsonPath("historiaLeczenia").value("Pacjent nie zdał egzaminu."))
                 .andExpect(status().isOk());
 
 //        this.mockMvc
-//                .perform(delete("/deleteUser/1000"))
+//                .perform(delete("/deleteKartePacjenta/1000"))
+//                .andDo(print())
+//                .andExpect(status().isOk());
+//
+//        this.mockMvc
+//                .perform(delete("/deleteWizyty/1000"))
 //                .andDo(print())
 //                .andExpect(status().isOk());
     }

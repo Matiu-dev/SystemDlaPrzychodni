@@ -1,6 +1,5 @@
 package com.example.System_dla_przychodni_v2;
 
-import com.example.System_dla_przychodni_v2.controller.UzytkownikController;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -13,24 +12,17 @@ import java.io.BufferedReader;
 import java.io.FileReader;
 import java.io.IOException;
 
-import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.post;
-
-import static org.springframework.test.web.servlet.MockMvcBuilder.*;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.*;
-import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.*;
-
+import static org.springframework.test.web.servlet.result.MockMvcResultHandlers.print;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.jsonPath;
+import static org.springframework.test.web.servlet.result.MockMvcResultMatchers.status;
 
 @SpringBootTest
 @AutoConfigureMockMvc
-public class UserTest {
+public class LekarzTest {
 
-    private final String CREATE_USER_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
-            "requests/createUser.json";
-
-    @Autowired
-    private UzytkownikController uzytkownikController;
-
+    private final String CREATE_LEKARZ_PATH = "src/test/java/com/example/System_dla_przychodni_v2/" +
+            "requests/createLekarz.json";
     @Autowired
     private MockMvc mockMvc;
 
@@ -38,23 +30,23 @@ public class UserTest {
     private ObjectMapper objectMapper;
 
     @Test
-    public void userTestController() throws Exception {
+    public void pacjentTestController() throws Exception {
 
         this.mockMvc
-                .perform(post("/createUser")
+                .perform(post("/createLekarz")
                         .contentType(MediaType.APPLICATION_JSON)
-                        .content(readFile(CREATE_USER_PATH)))
+                        .content(readFile(CREATE_LEKARZ_PATH)))
                 .andDo(print())
                 .andExpect(status().isCreated());
 
         this.mockMvc
-                .perform(get("/getUser/1000"))
+                .perform(get("/getLekarz/1000"))
                 .andDo(print())
-                .andExpect(jsonPath("email").value("emailtest"))
+                .andExpect(jsonPath("specjalizacja").value("leczenie"))
                 .andExpect(status().isOk());
 
 //        this.mockMvc
-//                .perform(delete("/deleteUser/1000"))
+//                .perform(delete("/deleteLekarz/1000"))
 //                .andDo(print())
 //                .andExpect(status().isOk());
     }

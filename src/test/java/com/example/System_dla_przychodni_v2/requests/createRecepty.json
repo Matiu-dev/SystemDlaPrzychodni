@@ -1,0 +1,13 @@
+{
+  "idRecepty": 1000,
+  "dataWystawienia": "2024-06-10",
+  "dawkowanie": "2xdziennie",
+  "nazwaLeku": "ibuprom",
+  "ilosc": 2,
+  "pacjent": {
+    "idPacjenta": 1000
+  },
+  "wizyty": {
+    "idWizyty": 1000
+  }
+}

@@ -1,0 +1,12 @@
+{
+  "idPacjenta": 1000,
+  "uzytkownik": {
+    "idUzytkownika": 1000
+  },
+  "imie": "imie",
+  "nazwisko": "nazwisko",
+  "pesel": 12345,
+  "numerTelefonu": 123456,
+  "dataUrodzenia": "2024-06-05",
+  "adres": "adres"
+}

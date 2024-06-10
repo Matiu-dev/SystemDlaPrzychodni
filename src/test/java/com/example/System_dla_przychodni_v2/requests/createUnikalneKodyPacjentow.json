@@ -1,0 +1,7 @@
+{
+  "idUnikalneKody": 1000,
+  "pacjent": {
+    "idPacjenta": 1000
+  },
+  "unikalneKodyPacjentow": "UnikalnyKod"
+}

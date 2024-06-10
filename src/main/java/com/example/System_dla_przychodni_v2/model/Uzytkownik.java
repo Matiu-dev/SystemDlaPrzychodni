@@ -1,7 +1,6 @@
 package com.example.System_dla_przychodni_v2.model;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
+import jakarta.persistence.*;
 
 @Entity
 public class Uzytkownik {
@@ -11,27 +10,16 @@ public class Uzytkownik {
     private String haslo;
     private String dataRejestracji;
     private String email;
-    private String imie;
-    private String nazwisko;
-
-    private int pesel;
-    private int numerTelefonu;
-    private String dataUrodzenia;
-    private String adres;
+    @OneToOne(mappedBy = "uzytkownik")
+    private Pacjent pacjent;
 
     public Uzytkownik() {}
 
-    public Uzytkownik(long idUzytkownika, String haslo, String dataRejestracji, String email, String imie, String nazwisko, int pesel, int numerTelefonu, String dataUrodzenia, String adres) {
+    public Uzytkownik(long idUzytkownika, String haslo, String dataRejestracji, String email) {
         this.idUzytkownika = idUzytkownika;
         this.haslo = haslo;
         this.dataRejestracji = dataRejestracji;
         this.email = email;
-        this.imie = imie;
-        this.nazwisko = nazwisko;
-        this.pesel = pesel;
-        this.numerTelefonu = numerTelefonu;
-        this.dataUrodzenia = dataUrodzenia;
-        this.adres = adres;
     }
 
     public long getIdUzytkownika() {
@@ -66,67 +54,13 @@ public class Uzytkownik {
         this.email = email;
     }
 
-    public String getImie() {
-        return imie;
-    }
-
-    public void setImie(String imie) {
-        this.imie = imie;
-    }
-
-    public String getNazwisko() {
-        return nazwisko;
-    }
-
-    public void setNazwisko(String nazwisko) {
-        this.nazwisko = nazwisko;
-    }
-
-    public int getPesel() {
-        return pesel;
-    }
-
-    public void setPesel(int pesel) {
-        this.pesel = pesel;
-    }
-
-    public int getNumerTelefonu() {
-        return numerTelefonu;
-    }
-
-    public void setNumerTelefonu(int numerTelefonu) {
-        this.numerTelefonu = numerTelefonu;
-    }
-
-    public String getDataUrodzenia() {
-        return dataUrodzenia;
-    }
-
-    public void setDataUrodzenia(String dataUrodzenia) {
-        this.dataUrodzenia = dataUrodzenia;
-    }
-
-    public String getAdres() {
-        return adres;
-    }
-
-    public void setAdres(String adres) {
-        this.adres = adres;
-    }
-
     @Override
     public String toString() {
         return "Uzytkownik{" +
-                "idUzytkownika=" + idUzytkownika +
+                "idUzytkownik=" + idUzytkownika +
                 ", haslo='" + haslo + '\'' +
                 ", dataRejestracji='" + dataRejestracji + '\'' +
                 ", email='" + email + '\'' +
-                ", imie='" + imie + '\'' +
-                ", nazwisko='" + nazwisko + '\'' +
-                ", pesel=" + pesel +
-                ", numerTelefonu=" + numerTelefonu +
-                ", dataUrodzenia='" + dataUrodzenia + '\'' +
-                ", adres='" + adres + '\'' +
                 '}';
     }
 }

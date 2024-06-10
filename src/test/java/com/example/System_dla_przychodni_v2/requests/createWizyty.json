@@ -1,0 +1,11 @@
+{
+  "idWizyty": 1000,
+  "pacjent": {
+    "idPacjenta": 1000
+  },
+  "lekarz": {
+    "idLekarza": 1000
+  },
+  "dataWizyty": "2024-06-10",
+  "historiaLeczenia": "Pacjent nie zdał egzaminu."
+}
